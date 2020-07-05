@@ -6,6 +6,7 @@ export class Cuenta {
         public _id?: number,
         public nroCuenta?: string,
         public nroCCI?: string,
+        public codSwift?: string,
         public nombre?: string,
         public descripcion?: string,
         public montoDisponible?: number,

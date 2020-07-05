@@ -13,7 +13,7 @@
                     <ng-template *ngIf="lstCuenta?.length > 0;" ngFor
                         let-cuenta [ngForOf]="lstCuenta" let-i="index">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <button type="button" class="btn btn-success btn-sm" ngbTooltip="Detalle de cuenta!" (click)="clickDetalle(cuenta);">
+                                <button type="button" class="btn btn-success btn-sm" ngbTooltip="Detalle de cuenta!" [ngClass]="block[i]" (click)="clickDetalle(cuenta);">
                                     <em class="fa fa-info-circle fa-3x"></em>
                                 </button>
                             <a href="" (click)="$event.preventDefault()" (click)="clickMovimiento(cuenta);" [ngClass]="block[i]" class="list-group-item list-group-item-action flex-column align-items-start lst-cuenta">

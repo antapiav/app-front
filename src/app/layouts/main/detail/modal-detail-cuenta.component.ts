@@ -55,6 +55,7 @@ export class ModalDetailCuentaComponent implements OnInit {
       finalize(() => {this.commonsService.closeModalLoading()}))
       .subscribe((data) => {
         this.cuenta = data.body.body;
+        this.cuenta.user = AppUtils.getSessionStorage();
         this.cuenta.createdAt = AppUtils.convertDateToString(this.cuenta.createdAt);
         this.cuenta.updatedAt = AppUtils.convertDateToString(this.cuenta.updatedAt);     
       });
