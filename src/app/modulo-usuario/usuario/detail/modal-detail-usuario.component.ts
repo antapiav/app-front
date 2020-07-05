@@ -54,7 +54,7 @@ export class ModalDetailUsuarioComponent implements OnInit {
             case AppConstants.Modal.OP_SAVE:
               this.hideStatus = false;
               this.disableBtnRegistrar = true;
-              this.usuario.indActivo = true;
+              this.usuario.indActivo = false;
               this.hidePassword = false;
               this.nameBtnOperation = AppConstants.Modal.BTN_REGISTRAR;
               this.usuarioForm.controls['indActivo'].disable();
