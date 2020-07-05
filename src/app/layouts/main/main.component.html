@@ -1,0 +1,49 @@
+<div class="row principal-new">
+    <div class="col-sm-12">
+        <div class="card text-center">
+            <div class="card-header color-font-new2">
+                Cuentas: {{usuario.name}}
+            </div>
+            <div class="card-body">
+                <div class="justify-content-center" *ngIf="(hideItem==true) ? false : true ">
+                    <div class="text-center"><span class="fa fa-circle-o-notch fa-spin fa-5x custom-text-blue"></span></div>
+                    <h3 class="font-blue-bbva">Cargando...</h3>
+                </div>
+                <div class="list-group" *ngIf="(hideItem==true) ? true : false ">
+                    <ng-template *ngIf="lstCuenta?.length > 0;" ngFor
+                        let-cuenta [ngForOf]="lstCuenta" let-i="index">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <button type="button" class="btn btn-success btn-sm" ngbTooltip="Detalle de cuenta!" (click)="clickDetalle(cuenta);">
+                                    <em class="fa fa-info-circle fa-3x"></em>
+                                </button>
+                            <a href="" (click)="$event.preventDefault()" (click)="clickMovimiento(cuenta);" [ngClass]="block[i]" class="list-group-item list-group-item-action flex-column align-items-start lst-cuenta">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p>{{cuenta.nombre}}</p>
+                                    </div>
+                                    <div class="col-md-2 offset-7">
+                                        <h6>S/. {{cuenta.montoDisponible}}</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h6>Nro. cuenta: {{cuenta.nroCuenta}}</h6>
+                                    </div>
+                                    <div class="col-md-2 offset-7">
+                                        <h6>Saldo disponible</h6>
+                                    </div>
+                                </div>
+                            </a>
+                    </div>
+                        <br>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <button type="button" class="btn btn-info btn-sm" ngbTooltip="Refrescar!" (click)="reqLstCuenta()">
+                    <em class="fa fa-refresh fa-2x"></em>
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>

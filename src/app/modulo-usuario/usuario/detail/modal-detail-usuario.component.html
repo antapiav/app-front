@@ -1,0 +1,138 @@
+<div class="modal-header alert-primary">
+	<h4 class="modal-title font-weight-bold">{{ titulo }}</h4>
+	<button type="button" class="btn btn-default btn-sm" aria-label="Close" (click)="bsModalRef.hide()">
+		<em class="fa fa-window-close"></em>
+	</button>
+</div>
+<div class="modal-body">
+    <br>
+    <div class="card bg-light">
+      <div class="card-body">
+        <div class="card">
+          <div class="card-body">
+            <form  [formGroup]="usuarioForm">
+                <div class="container">
+                    <div class="form-row">
+                        <div class="form-group col-md-6 form-row">
+                            <label for="staticDni" class="text-md-right col-md-2 col-form-label ">D.N.I.:</label>
+                            <div class="col-md-5">
+                                <input type="text" name="dni" class="form-control form-control-sm" id="idDNI" placeholder="DNI..." maxlength="8" autocomplete = "off" 
+                                formControlName="dni" [disabled]="disable" [ngClass]="{ 'is-invalid': statusValidateDni && f.dni.errors && f.dni.touched}"
+                                [(ngModel)]="usuario.dni" (input)="validInput($event.target.name)">
+                                <div *ngIf="statusValidateDni && f.dni.errors && f.dni.touched" class="invalid-feedback">
+                                    <div *ngIf="f.dni.errors.required">(*) D.N.I. es requerido</div>
+                                    <div *ngIf="f.dni.errors.minlength">(*) Minimo 8 caracteres</div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-default btn-sm" (click)="getDataRenic()" [hidden]="hideStatusReniec" style="width: 100px;" [hidden]="hideStatus">RENIEC
+                                    <em class="fa fa-location-arrow"></em>
+                                </button>
+                            </div>
+                        </div>  
+                        <div class="form-group col-md-6 form-row"></div>                      
+                        <div class="form-group col-md-6 form-row">
+                            <label for="idName" class="text-md-right col-md-2 col-form-label">Nombres:</label>
+                            <div class="col-md-10">
+                                <input type="text" name="name" class="form-control form-control-sm" id="idName" placeholder="Nombres..." autocomplete = "off" 
+                            [disabled]="disable"  [ngClass]="{ 'is-invalid': statusValidateName && f.name.errors && f.name.touched }" 
+                            [(ngModel)]="usuario.name" formControlName="name" (input)="validInput($event.target.name)"/>
+                            <div *ngIf="statusValidateName && f.name.errors && f.name.touched" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">(*) Nombres es requerido</div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 form-row">
+                            <label for="idEmail" class="text-md-right col-md-3 col-form-label">Email:</label>
+                            <div class="col-md-9">
+                                <input type="email" name="email" class="form-control form-control-sm" id="idEmail" placeholder="email@ejemplo.com" autocomplete = "off" 
+                            formControlName="email" [ngClass]="{ 'is-invalid': statusValidateEmail && f.email.errors && f.email.touched}"
+                            [(ngModel)]="usuario.email" [disabled]="disable" (input)="validInput($event.target.name)"/>
+                            <div *ngIf="statusValidateEmail && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.email">(*) Ingrese un correo valido</div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 form-row" [hidden]="hideRol">
+                            <label for="idCreateAt" class="text-md-right col-md-2 col-form-label">Fecha creado:</label>
+                            <div class="col-md-10">
+                                <input type="text" [(ngModel)]="usuario.createdAt" formControlName="createdAt" name="createdAt" class="form-control form-control-sm" id="idCreateAt" placeholder="DD/MM/YYYY" readonly autocomplete = "off">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 form-row" [hidden]="hideRol">
+                            <label for="idCreateAt" class="text-md-right col-md-3 col-form-label">Fecha modificado:</label>
+                            <div class="col-md-9">
+                                <input type="email" [(ngModel)]="usuario.updatedAt" formControlName="updatedAt" name="updatedAt" class="form-control form-control-sm" id="idUpdateAt" placeholder="DD/MM/YYYY" readonly autocomplete = "off">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 form-row" [hidden]="hidePassword">
+                            <label for="idCreateAt" class="text-md-right col-md-2 col-form-label">Contraseña:</label>
+                            <div class="col-md-10">
+                                <input type="password" name="password" class="form-control form-control-sm" id="idPassword" placeholder="Ingrese contraseña..." autocomplete = "off" 
+                                formControlName="password" [disabled]="disable" [ngClass]="{ 'is-invalid': statusValidatePassword && f.password.errors && f.password.touched}"
+                                [(ngModel)]="usuario.password" (input)="validInput($event.target.name)">
+                                <div *ngIf="statusValidatePassword && f.password.errors && f.password.touched" class="invalid-feedback">
+                                    <div *ngIf="f.password.errors.required">(*) Contraseña es requerido</div>
+                                </div>                         
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 form-row"  [hidden]="hidePassword">
+                            <label for="idCreateAt" class="text-md-right col-md-3 col-form-label">Validar contraseña:</label>
+                            <div class="col-md-9">
+                                <input type="password" name="confirmPassword" class="form-control form-control-sm" id="idConfirmPassword" placeholder="Repetir contraseña..." autocomplete = "off" 
+                                formControlName="confirmPassword" [disabled]="disable" [ngClass]="{ 'is-invalid': statusValidateConfirmPassword && f.confirmPassword.errors && f.confirmPassword.touched}"
+                                 (input)="validInput($event.target.name)">
+                                <div *ngIf="statusValidateConfirmPassword && f.confirmPassword.errors && f.confirmPassword.touched" class="invalid-feedback">
+                                    <div *ngIf="f.confirmPassword.errors.required">(*) Validar contraseña es requerido</div>
+                                    <div *ngIf="f.confirmPassword.errors.mustMatch">(*) Contraseña es distinta</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 form-row" [hidden]="hideRol">
+                            <label for="staticEmail" class="text-md-right col-md-2 col-form-label">Estado:</label>
+                            <div class="col-md-2">
+                                <label class="switch">
+                                    <input id="indActivo" type="checkbox" class="form-check-input" name="indEstado"
+                                    [disabled]="disableBtnRegistrar" [(ngModel)]="usuario.indActivo" formControlName="indActivo"/>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="staticEmail" class="text-md-right col-form-label">
+                                    <p *ngIf="usuario.indActivo == true" class="text-success font-weight-bold">ALTA</p>
+                                    <p *ngIf="usuario.indActivo == false" class="text-danger font-weight-bold">INACTIVO</p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 form-row">
+                            <select class="form-control form-control-sm" [hidden]="hideRol" formControlName="rol" [(ngModel)]="usuario.rol" name="rol">
+                                <option value="0">Normal</option>
+                                <option value="1">Admin</option>
+                              </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-default btn-sm" [disabled]="usuarioForm.invalid" [hidden]="hideStatus" (click)="btnOperacion();"
+		style="width: 100px;">{{nameBtnOperation}}
+		<em class="fa fa-save"></em>
+	</button>
+	<button type="button" class="btn btn-default btn-sm" (click)="bsModalRef.hide()" style="width: 100px;">Cerrar
+		<em class="fa fa-times-circle"></em>
+	</button>
+</div>
+
+<!--
+<button *ngIf="!params.showView" *ngFor="let option of options" type="button" class="btn btn-default btn-sm" (click)="btnRegistrarCliente(option)" style="width: 100px;">{{option}}
+<div class="modal-footer">
+	<ng-container *ngIf="options.length">
+		<button *ngFor="let option of options" type="button" class="btn btn-default" (click)="respond(option)">{{option}}</button>
+	</ng-container>
+</div>-->

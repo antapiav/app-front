@@ -1,0 +1,90 @@
+<div class="row principal-new">    
+    <div class="col-sm-12">
+        <div class="card text-center">
+            <div class="card-header" ><!--(click)="btnNuevo()">-->
+                <h5>Usuario</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group col-md-12 form-row">
+                    <div class="form-group col-md-4 form-row">
+                      <select class="form-control form-control-sm" [(ngModel)]="genericSearch.tipo" name="searchCliente">
+                        <!-- <option value="{{stringVacio}}">{{defaultTipoSearch}}</option> -->
+                        <option value="0">D.N.I.</option>
+                        <option value="1">Nombre</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-7 form-row">
+                      <div class="col-md-12 input-group">
+                        <input type="text" class="form-control form-control-sm" name="dato" [(ngModel)]="genericSearch.dato" (keyup)="reqLstUsuario();" placeholder="Ingrese nombre o N° D.N.I."/>
+                      </div>
+                    </div> 
+                    <div class="form-group col-md-1 form-row">
+                        <button type="button" class="btn btn-default btn-sm" (click)="btnNuevo()" ngbTooltip="Nuevo Usuario!" style="width: 100px;">Nuevo
+                            <em class="fa fa-plus"></em>
+                        </button>
+                    </div>
+                </div>  
+            </div>
+            <div class="card-footer text-muted table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">D.N.I.</th>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Fecha creaci&oacute;n</th>
+                        <th scope="col">Fecha Modificado</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col" colspan="2">Operaciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <ng-template *ngIf="lstUsuario?.length > 0; else tableEmptyCliente" ngFor
+                            let-usuario [ngForOf]="lstUsuario" let-i="index">
+                            <tr>
+                                <td>{{(i+1)}}</td>
+                                <td>{{usuario.dni}}</td>
+                                <td>{{usuario.name}}</td>
+                                <td>{{usuario.email}}</td>
+                                <td>{{usuario.createdAt}}</td>
+                                <td>{{usuario.updatedAt}}</td>
+                                <td *ngIf="usuario.rol == 1">Admin</td>
+                                <td *ngIf="usuario.rol == 0">Normal</td>
+                                <td *ngIf="usuario.indActivo == true"><h6><span class="badge badge-pill badge-success">ALTA</span></h6></td>
+                                <td *ngIf="usuario.indActivo == false"><h6><span class="badge badge-pill badge-danger">INACTIVO</span></h6></td>
+                                <td colspan="2">
+                                    <div class="btn-toolbar btn-margin justify-content-center" style="min-width: 80px;">
+                                        <button type="button" class="btn btn-default btn-sm" ngbTooltip="Ver Detalle!" (click)="btnDetalle(usuario)">
+                                          <em class="fa fa-eye"></em>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-sm" ngbTooltip="Editar Detalle!" (click)="btnEditar(usuario)">
+                                          <em class="fa fa-edit"></em>
+                                        </button>
+                                        <button type="button" class="btn btn-secundary btn-sm" ngbTooltip="Dar de Alta!" (click)="btnAlta(usuario)">
+                                          <em class="fa fa-minus-circle"></em>
+                                        </button>
+                                      </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #tableEmptyCliente>
+    <tr style="height: 100px;">
+      <td colspan="12">
+        <div class="text-center" *ngIf="hideTableLoad == true">
+          <span class="fa fa-circle-o-notch fa-spin fa-10x custom-text-blue"></span>
+        </div>
+        <div class="text-center" *ngIf="hideTableLoad == false">
+            <h4>Sin resultados :(</h4>
+          </div>
+      </td>
+    </tr>
+</ng-template>

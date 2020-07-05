@@ -1,0 +1,33 @@
+<div class="row principal-new">
+    <div class="col-sm-12">
+        <div class="card text-center">
+            <div class="card-header color-font-new2">
+                Movimientos: {{cuentaTitle}}
+            </div>
+            <div class="card-body">
+                <div class="justify-content-center" *ngIf="(hideItem==true) ? false : true ">
+                    <div class="text-center"><span class="fa fa-circle-o-notch fa-spin fa-5x custom-text-blue"></span></div>
+                    <h3 class="font-blue-bbva">Cargando...</h3>
+                </div>
+                <div class="list-group" *ngIf="(hideItem==true) ? true : false ">
+                    <ng-template *ngIf="lstMovimiento?.length > 0;" ngFor
+                        let-movimiento [ngForOf]="lstMovimiento" let-i="index">
+                        <a href="" (click)="$event.preventDefault()" (click)="clickMovimiento(movimiento);" [ngClass]="block[i]" class="list-group-item list-group-item-action flex-column align-items-start lst-movimiento">
+                            <div class="d-flex w-100 justify-content-between">
+                            <p>Monto: S/. {{movimiento.monto}}</p>
+                            <h6><span class="badge badge-success">Fecha: {{movimiento.fecha}}</span></h6>
+                            </div>
+                            <h6 class="mb-1">{{movimiento.detalle}}</h6>
+                            <p>Nro. movimiento: {{movimiento.nroMovimiento}}</p>
+                        </a>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <button type="button" class="btn btn-info btn-sm" ngbTooltip="Refrescar!" (click)="reqLstMovimiento()">
+                    <em class="fa fa-refresh fa-2x"></em>
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<div class="modal-header alert-primary">
+	<h4 class="modal-title font-weight-bold">{{ titulo }}</h4>
+	<button type="button" class="btn btn-default btn-sm" aria-label="Close" (click)="bsModalRef.hide()">
+		<em class="fa fa-window-close"></em>
+	</button>
+</div>
+<div class="modal-body">
+    <br>
+    <div class="card bg-light">
+      <div class="card-body">
+        <div class="card">
+          <div class="card-body">
+            <div class="container">
+                <div class="form-row">
+                    <div class="form-group col-md-12 form-row">
+                        <div class="col-md-2 color-font-new2">Fecha:</div>
+                        <div class="col-md-4 color-font-new3">
+                            {{movimiento.fecha}}
+                        </div>
+                    </div> 
+                </div>
+                <hr>
+                <div class="form-row">
+                    <div class="form-group col-md-12 form-row">
+                        <div class="col-md-2 color-font-new2">Nro. Movimiento:</div>
+                        <div class="col-md-4 color-font-new3">
+                            N° {{movimiento.nroMovimiento}}
+                        </div>
+                        <div class="col-md-2 color-font-new2">Monto:</div>
+                        <div class="col-md-4 color-font-new3">
+                            S/. {{movimiento.monto}}
+                        </div>
+                    </div> 
+                </div>
+                <hr>
+                <div class="form-row">
+                    <div class="form-group col-md-12 form-row">
+                        <div class="col-md-2 color-font-new2">Cuenta:</div>
+                        <div class="col-md-4 color-font-new3">
+                            {{movimiento.cuenta.nombre}}
+                        </div>
+                        <div class="col-md-2 color-font-new2">Nro. cuenta:</div>
+                        <div class="col-md-4 color-font-new3">
+                            {{movimiento.cuenta.nroCuenta}}
+                        </div>
+                    </div> 
+                </div>
+                <hr>
+                <hr>
+                <div class="form-row">
+                    <div class="col-md-12 bg-success text-white text-center" *ngIf="movimiento.indActivo == true"><h4>Movimiento Activo</h4></div>
+                    <div class="col-md-12 bg-danger text-white  text-center" *ngIf="movimiento.indActivo == false"><h4>Movimiento Inactivo</h4></div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-danger btn-sm" [disabled]="!disabledStatus" (click)="btnOperacion();"
+		style="width: 100px;">Alta
+		<em class="fa fa-check-square-o"></em>
+	</button>
+	<button type="button" class="btn btn-default btn-sm" (click)="bsModalRef.hide()" style="width: 100px;">Cerrar
+		<em class="fa fa-times-circle"></em>
+	</button>
+</div>
+
+<!--
+<button *ngIf="!params.showView" *ngFor="let option of options" type="button" class="btn btn-default btn-sm" (click)="btnRegistrarCliente(option)" style="width: 100px;">{{option}}
+<div class="modal-footer">
+	<ng-container *ngIf="options.length">
+		<button *ngFor="let option of options" type="button" class="btn btn-default" (click)="respond(option)">{{option}}</button>
+	</ng-container>
+</div>-->

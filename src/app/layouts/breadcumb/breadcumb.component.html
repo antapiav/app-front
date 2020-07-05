@@ -1,0 +1,22 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb app-font-size-16x">
+    <ng-template ngFor let-breadcumb [ngForOf]="listBreadcumb" let-i="index" let-l="last">
+      <li class="breadcrumb-item">
+        <span *ngIf="l && !singleBreadcumb">
+          <em class="fa fa-check color-text-azul" style="font-size: 15px;"></em>
+        </span>
+        <span [ngClass]="[l && !singleBreadcumb ? 'font-weight-bold color-text-azul' : 'color-text-azul']">
+          {{breadcumb}}
+        </span>
+      </li>
+    </ng-template>
+    <li class="breadcrumb-item" *ngIf="singleBreadcumb">
+      <span>
+        <em class="fa fa-check color-text-azul" style="font-size: 15px;"></em>
+      </span>
+      <span class="font-weight-bold color-text-azul">
+        {{singleBreadcumb}}
+      </span>
+    </li>
+  </ol>
+</nav>

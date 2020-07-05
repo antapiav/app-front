@@ -1,0 +1,48 @@
+<ul class="header-layouts list-unstyled">
+	<li class="color-new3"></li>
+</ul>
+<nav class="color-new navbar navbar-expand-lg navbar-light">
+	<!--<div class="navbar-header">-->
+        <!--<a class="navbar-brand hidden-sm hidden-md hidden-lg" href="#" style="color: #FFF;">BBVA</a>-->
+        <a class="navbar-brand hidden-sm hidden-md hidden-lg" href="#">
+          <img class="img-navar" src="assets/img/logo_bbva_blanco.png" alt="">
+        </a>
+		<button type="button" class="navbar-toggler" data-toggle="collapse" (click)="collapsed = !collapsed" data-target="#menu-principal" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="text-white"><em class="fa fa-bars fa-2x"></em></span>
+		</button>
+	<!--</div>-->
+
+	<div id="menu-principal" class="collapse navbar-collapse" [collapse]="collapsed">
+		<ul class="nav navbar-nav mr-auto ">
+			<li *ngFor="let menu of listMenu" class="nav-item dropdown" dropdown>
+				<a id="navbarDropdownMenuLink" href="" (click)="$event.preventDefault()" dropdownToggle class="nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <em class="color-text-blanco fa {{menu.icon}}"></em>
+					<span class="color-text-blanco">{{menu.name}}</span>
+				</a>
+				<ul class="dropdown-menu app-font-size-14x" *dropdownMenu aria-labelledby="navbarDropdownMenuLink">
+					<ng-template ngFor let-childMenu [ngForOf]="menu.listMenu" let-i="index">
+						<ng-template *ngIf="childMenu.listMenu;then content1 else content2"></ng-template>
+						<ng-template #content1>
+							<li class="nav-item dropdown">
+								<h6 class="dropdown-header">{{childMenu.name}}</h6>
+							</li>
+							<li *ngFor="let childMenu1 of childMenu.listMenu" class="nav-item dropdown">
+								<a routerLink="{{childMenu1.route}}" class="dropdown-item" tabindex="-1">
+									<em class="fa {{childMenu1.icon}}"></em> {{childMenu1.name}}
+								</a>
+							</li>
+							<div class="dropdown-divider"></div>
+						</ng-template>
+						<ng-template #content2>
+							<li class="nav-item dropdown">
+								<a routerLink="{{childMenu.route}}" class="dropdown-item" tabindex="-1">
+									<em class="fa {{childMenu.icon}}"></em> {{childMenu.name}}
+								</a>
+							</li>
+						</ng-template>
+					</ng-template>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</nav>

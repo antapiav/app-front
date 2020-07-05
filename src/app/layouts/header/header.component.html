@@ -1,0 +1,31 @@
+<header class="relative text-center">
+	<div class="bloque-referencia">
+		<ul class="bloque-referencia-user">
+			<li>
+				<span class="color-text-azul">
+					<em class="fa fa-user-circle fa-2x"></em>
+					<span> Datos Usuario</span>
+				</span>
+				<span>{{usuario.email}}</span>
+			</li>
+			<li class="control-oculto">
+				<span class="color-text-azul">
+					<em class="fa fa-male fa-2x"></em>
+					<span> Perfil Usuario</span>
+				</span>
+				<span>admin</span>
+			</li>
+			<li class="control-oculto">
+				<span class="color-text-azul">
+					<em class="fa fa-clock-o fa-2x"></em> Fecha y Hora </span>
+                <span>{{(today | async) | date:'dd-MM-yyyy HH:mm:ss a'}}</span>
+			</li>
+			<li class="paddl5">
+				<a role="button" class="btn btn-secundary btn-off pull-right paddlr5" (click)="logout()" ngbTooltip="Cerrar sessión">
+					<span>Cerrar Sesi&oacute;n </span>
+					<em class="fa fa-sign-out"></em>
+				</a>
+			</li>
+		</ul>
+	</div>
+</header>
