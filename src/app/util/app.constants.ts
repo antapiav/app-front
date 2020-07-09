@@ -13,7 +13,7 @@ export class AppConstants {
     }
 
     public static ApiUrls = class {
-        public static CONSULTA_RENIEC_RUC = "http://127.0.0.1:8090/consulta/reniec/";
+        public static CONSULTA_RENIEC_RUC = "https://api-reniec.herokuapp.com/consulta/reniec/";//"http://127.0.0.1:8090/consulta/reniec/";
 
         public static USUARIO_GET_LST = API_CONTEXT_PATH + "usuario/operation/lst?tipo=";
         public static USUARIO_GET_LST_2 = "&dato=";
